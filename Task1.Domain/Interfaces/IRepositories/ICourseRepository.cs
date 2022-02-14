@@ -7,5 +7,6 @@ public interface ICourseRepository : IRepository<Course>
 {
     new Task<List<Course>> GetAll();
     Task<IEnumerable<Course>> GetCoursesByCategoryId(long categoryId);
-    Task<IEnumerable<Course>> GetCoursesByType(CourseType searchedValue);
+    Task<IEnumerable<Course>> GetCoursesByType(CourseType type);
+    Task<IEnumerable<Course>> GetCoursesByLevel(CourseLevel level);
 }

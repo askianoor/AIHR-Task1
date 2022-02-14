@@ -1,7 +1,7 @@
 ﻿namespace Task1.Domain.Enums;
 
-public enum CourseType
+public enum CourseType: byte
 {
-    Free = 1,
+    Free = 0,
     Premium
 }

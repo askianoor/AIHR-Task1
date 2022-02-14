@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Task1.Domain.Enums;
 using Task1.Domain.Interfaces.IRepositories;
 using Task1.Domain.Models;
@@ -27,10 +22,17 @@ public class CourseRepository : Repository<Course>, ICourseRepository
         return await Search(b => b.CategoryId == categoryId);
     }
 
-    public async Task<IEnumerable<Course>> GetCoursesByType(CourseType searchedValue)
+    public async Task<IEnumerable<Course>> GetCoursesByType(CourseType type)
     {
         return await _db.Courses.AsNoTracking()
-            .Where(b => b.Type == searchedValue)
+            .Where(b => b.Type == type)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Course>> GetCoursesByLevel(CourseLevel level)
+    {
+        return await _db.Courses.AsNoTracking()
+            .Where(b => b.Level == level)
             .ToListAsync();
     }
 }

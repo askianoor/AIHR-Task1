@@ -61,11 +61,74 @@ namespace Task1.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Course Error: {0}.
+        /// </summary>
+        public static string AddCourseError {
+            get {
+                return ResourceManager.GetString("AddCourseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Add this item!.
+        /// </summary>
+        public static string CanNotAdd {
+            get {
+                return ResourceManager.GetString("CanNotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Delete this item!.
+        /// </summary>
+        public static string CanNotDelete {
+            get {
+                return ResourceManager.GetString("CanNotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This item is not available!.
         /// </summary>
         public static string CanNotFound {
             get {
                 return ResourceManager.GetString("CanNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Update this item!.
+        /// </summary>
+        public static string CanNotUpdate {
+            get {
+                return ResourceManager.GetString("CanNotUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The item is already exist!.
+        /// </summary>
+        public static string DuplicateCourseMsg {
+            get {
+                return ResourceManager.GetString("DuplicateCourseMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Course Error: {0}.
+        /// </summary>
+        public static string RemoveCourseError {
+            get {
+                return ResourceManager.GetString("RemoveCourseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Course Error: {0}.
+        /// </summary>
+        public static string UpdateCourseError {
+            get {
+                return ResourceManager.GetString("UpdateCourseError", resourceCulture);
             }
         }
     }

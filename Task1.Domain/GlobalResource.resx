@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCourseError" xml:space="preserve">
+    <value>Add Course Error: {0}</value>
+  </data>
+  <data name="CanNotAdd" xml:space="preserve">
+    <value>Failed to Add this item!</value>
+  </data>
+  <data name="CanNotDelete" xml:space="preserve">
+    <value>Failed to Delete this item!</value>
+  </data>
   <data name="CanNotFound" xml:space="preserve">
     <value>This item is not available!</value>
+  </data>
+  <data name="CanNotUpdate" xml:space="preserve">
+    <value>Failed to Update this item!</value>
+  </data>
+  <data name="DuplicateCourseMsg" xml:space="preserve">
+    <value>The item is already exist!</value>
+  </data>
+  <data name="RemoveCourseError" xml:space="preserve">
+    <value>Remove Course Error: {0}</value>
+  </data>
+  <data name="UpdateCourseError" xml:space="preserve">
+    <value>Update Course Error: {0}</value>
   </data>
 </root>

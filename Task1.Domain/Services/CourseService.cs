@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Mapster;
+using Microsoft.Extensions.Logging;
+using Task1.Domain.Dtos;
+using Task1.Domain.Enums;
 using Task1.Domain.Interfaces.Base;
 using Task1.Domain.Interfaces.IRepositories;
 using Task1.Domain.Interfaces.IServices;
@@ -19,23 +22,28 @@ public class CourseService : ICourseService
         _logger = logger;
     }
 
-    public async Task<IEnumerable<Course>> GetAll()
+    public async Task<IEnumerable<CourseResponseDto>> GetAll()
     {
-        return await _courseRepository.GetAll();
+        var courses = await _courseRepository.GetAll();
+        
+        return courses.Adapt<IEnumerable<CourseResponseDto>>();
     }
 
-    public async Task<Course> GetById(long id)
+    public async Task<CourseResponseDto> GetById(long id)
     {
-        return await _courseRepository.GetById(id);
+        var course = await _courseRepository.GetById(id);
+        return course.Adapt<CourseResponseDto>();
     }
 
-    public async Task<Course> Add(Course course)
+    public async Task<CourseResponseDto> Add(CourseRequestDto input)
     {
-        var courseExist = await _courseRepository.AnyAsync(c => c.Name == course.Name);
+        var courseExist = await _courseRepository.AnyAsync(c => c.Name == input.Name);
         if (courseExist)
         {
-            throw new Exception("DuplicateCourseMsg");
+            throw new Exception(GlobalResource.DuplicateCourseMsg);
         }
+
+        var course = input.Adapt<Course>();
 
         try
         {
@@ -45,38 +53,83 @@ public class CourseService : ICourseService
         catch (Exception ex)
         {
             _unitOfWork.Dispose();
-            _logger.LogError("AddCourseError: {0}", ex.Message);
+            _logger.LogError(GlobalResource.AddCourseError, ex.Message);
         }
 
-        return course;
+        return course.Adapt<CourseResponseDto>();
     }
 
-    public Task<Course> Update(Course course)
+    public async Task<CourseResponseDto> Update(CourseRequestDto input)
     {
-        throw new NotImplementedException();
+        if (!await _courseRepository.AnyAsync(b => b.Id == input.Id))
+        {
+            throw new Exception(GlobalResource.CanNotFound);
+        }
+
+        var course = input.Adapt<Course>();
+
+        try
+        {
+            await _courseRepository.Update(course);
+            _unitOfWork.Commit();
+        }
+        catch (Exception ex)
+        {
+            _unitOfWork.Dispose();
+            _logger.LogError(GlobalResource.UpdateCourseError, ex.Message);
+
+            throw new Exception(GlobalResource.CanNotUpdate);
+        }
+
+        return course.Adapt<CourseResponseDto>();
     }
 
-    public Task<bool> Remove(Course course)
+    public async Task<bool> Remove(long id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = await _courseRepository.GetById(id);
+            var course = result.Adapt<Course>();
+            await _courseRepository.Remove(course);
+            _unitOfWork.Commit();
+        }
+        catch (Exception ex)
+        {
+            _unitOfWork.Dispose();
+            _logger.LogError(GlobalResource.RemoveCourseError, ex.Message);
+
+            return false;
+        }
+
+        return true;
     }
 
-    public Task<IEnumerable<Course>> Search(string courseName)
-    {
-        throw new NotImplementedException();
+    public async Task<IEnumerable<CourseResponseDto>> Search(string courseName)
+    { 
+        var courses = await _courseRepository.Search(row => row.Name.Contains(courseName));
+        return courses.Adapt<IEnumerable<CourseResponseDto>>();
     }
 
-    public Task<IEnumerable<Course>> GetCoursesByCategoryId(long categoryId)
+    public async Task<IEnumerable<CourseResponseDto>> GetCoursesByCategoryId(long categoryId)
     {
-        throw new NotImplementedException();
+        var courses = await _courseRepository.GetCoursesByCategoryId(categoryId);
+        return courses.Adapt<IEnumerable<CourseResponseDto>>();
     }
 
-    public Task<IEnumerable<Course>> GetCoursesByType(string searchedValue)
+    public async Task<IEnumerable<CourseResponseDto>> GetCoursesByType(CourseType type)
     {
-        throw new NotImplementedException();
+        var courses = await _courseRepository.GetCoursesByType(type);
+        return courses.Adapt<IEnumerable<CourseResponseDto>>();
     }
+
+    public async Task<IEnumerable<CourseResponseDto>> GetCoursesByLevel(CourseLevel level)
+    {
+        var courses = await _courseRepository.GetCoursesByLevel(level);
+        return courses.Adapt<IEnumerable<CourseResponseDto>>();
+    }
+
     public void Dispose()
     {
-        throw new NotImplementedException();
+        GC.SuppressFinalize(this);
     }
 }

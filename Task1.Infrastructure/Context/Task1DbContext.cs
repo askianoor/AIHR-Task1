@@ -20,6 +20,22 @@ public class Task1DbContext : DbContext
             .SelectMany(e => e.GetForeignKeys()))
             relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
+        ConfigureCourses(modelBuilder);
+
         base.OnModelCreating(modelBuilder);
     }
+
+    private static void ConfigureCourses(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Course>()
+            .HasOne(b => b.Category)
+            .WithMany(b => b.Courses)
+            .HasForeignKey(b => b.CategoryId);
+
+        modelBuilder.Entity<Course>()
+            .HasOne(b => b.Tutor)
+            .WithMany(b => b.Courses)
+            .HasForeignKey(b => b.TutorId);
+    }
+
 }
