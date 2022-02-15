@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using Microsoft.Extensions.Logging;
 using Task1.Domain.Dtos;
 using Task1.Domain.Interfaces.Base;
@@ -15,6 +10,7 @@ namespace Task1.Domain.Services;
     public abstract class ApplicationService<TEntity, TPrimaryKey, TRequest,TResponse, TService> 
         where TEntity : EntityName 
         where TRequest : IEntityNameDto<long>
+        where TResponse : class
     {
     private readonly IRepository<TEntity, TPrimaryKey> _repository;
     private readonly IUnitOfWork _unitOfWork;
@@ -115,10 +111,8 @@ namespace Task1.Domain.Services;
         return categories.Adapt<IEnumerable<TResponse>>();
     }
 
-
     public void Dispose()
     {
         GC.SuppressFinalize(this);
     }
 }
-

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Task1.Domain.Interfaces.Base;
+﻿using Task1.Domain.Interfaces.Base;
 using Task1.Domain.Interfaces.IRepositories;
 using Task1.Domain.Interfaces.IServices;
 using Task1.Domain.Services;
@@ -18,7 +17,8 @@ public static class DependencyInjectionConfig
 
         services.AddScoped<Task1DbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+        services.AddTransient(typeof(IApplicationService<,,,,>), typeof(ApplicationService<,,,,>));
+        
         #endregion
 
         #region Repositories
@@ -36,7 +36,7 @@ public static class DependencyInjectionConfig
         services.AddTransient<ITutorService, TutorService>();
 
         #endregion
-        
+
         return services;
     }
 }

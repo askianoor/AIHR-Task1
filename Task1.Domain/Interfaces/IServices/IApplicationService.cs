@@ -1,6 +1,8 @@
 ﻿namespace Task1.Domain.Interfaces.IServices;
 
-public interface IApplicationService<in TRequest, TResponse>
+public interface IApplicationService<TEntity, TPrimaryKey, TRequest, TResponse, TService>
+    where TRequest: class 
+    where TResponse: class
 {
     Task<IEnumerable<TResponse>> GetAll();
     Task<TResponse> GetById(long id);

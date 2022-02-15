@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Task1.Domain.Dtos;
 using Task1.Domain.Dtos.Course;
 using Task1.Domain.Enums;
 using Task1.Domain.Interfaces.IServices;

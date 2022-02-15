@@ -1,5 +1,4 @@
-﻿using Mapster;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Task1.Domain.Dtos.Category;
 using Task1.Domain.Interfaces.Base;
 using Task1.Domain.Interfaces.IRepositories;
