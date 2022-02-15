@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Task1.Domain.Dtos;
+using Task1.Domain.Dtos.Course;
+using Task1.Domain.Enums;
 using Task1.Domain.Interfaces.IServices;
 
 
@@ -20,6 +22,24 @@ public class CourseController : ControllerBase
     public async Task<IEnumerable<CourseResponseDto>> GetAllAsync()
     {
         return await _courseService.GetAll();
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<CourseResponseDto>> GetAllByLevelAsync(CourseLevel courseLevel)
+    {
+        return await _courseService.GetCoursesByLevel(courseLevel);
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<CourseResponseDto>> GetAllByTypeAsync(CourseType courseType)
+    {
+        return await _courseService.GetCoursesByType(courseType);
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<CourseResponseDto>> GetAllByCategoryAsync(long categoryId)
+    {
+        return await _courseService.GetCoursesByCategoryId(categoryId);
     }
 
     // GET api/<CourseController>/5

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Task1.Domain.Enums;
 
-namespace Task1.Domain.Dtos;
+namespace Task1.Domain.Dtos.Course;
 
 public class CourseRequestDto
 {

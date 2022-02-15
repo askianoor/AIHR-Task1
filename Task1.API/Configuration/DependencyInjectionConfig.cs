@@ -24,12 +24,14 @@ public static class DependencyInjectionConfig
         #region Repositories
 
         services.AddScoped<ICourseRepository, CourseRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         #endregion
 
         #region Services
 
         services.AddTransient<ICourseService, CourseService>();
+        services.AddTransient<ICategoryService, CategoryService>();
 
         #endregion
         

@@ -132,7 +132,7 @@
   <data name="CanNotUpdate" xml:space="preserve">
     <value>Failed to Update this item!</value>
   </data>
-  <data name="DuplicateCourseMsg" xml:space="preserve">
+  <data name="DuplicateMsg" xml:space="preserve">
     <value>The item is already exist!</value>
   </data>
   <data name="RemoveCourseError" xml:space="preserve">

@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using Microsoft.Extensions.Logging;
 using Task1.Domain.Dtos;
+using Task1.Domain.Dtos.Course;
 using Task1.Domain.Enums;
 using Task1.Domain.Interfaces.Base;
 using Task1.Domain.Interfaces.IRepositories;
@@ -40,7 +41,7 @@ public class CourseService : ICourseService
         var courseExist = await _courseRepository.AnyAsync(c => c.Name == input.Name);
         if (courseExist)
         {
-            throw new Exception(GlobalResource.DuplicateCourseMsg);
+            throw new Exception(GlobalResource.DuplicateMsg);
         }
 
         var course = input.Adapt<Course>();

@@ -108,9 +108,9 @@ namespace Task1.Domain {
         /// <summary>
         ///   Looks up a localized string similar to The item is already exist!.
         /// </summary>
-        public static string DuplicateCourseMsg {
+        public static string DuplicateMsg {
             get {
-                return ResourceManager.GetString("DuplicateCourseMsg", resourceCulture);
+                return ResourceManager.GetString("DuplicateMsg", resourceCulture);
             }
         }
         
