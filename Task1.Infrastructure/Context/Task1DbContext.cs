@@ -24,11 +24,13 @@ public class Task1DbContext : DbContext
             relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
         ConfigureCourses(modelBuilder);
+        ConfigureUser(modelBuilder);
         ConfigureUserRequests(modelBuilder);
         ConfigureUserRequestCourses(modelBuilder);
 
         base.OnModelCreating(modelBuilder);
     }
+
 
     #region Model Configuration
 
@@ -44,6 +46,13 @@ public class Task1DbContext : DbContext
             .WithMany(b => b.Courses)
             .HasForeignKey(b => b.TutorId);
     }
+
+    private static void ConfigureUser(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>()
+            .HasIndex(b => b.Username).IsUnique();
+    }
+
 
     private static void ConfigureUserRequests(ModelBuilder modelBuilder)
     {
