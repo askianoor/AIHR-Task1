@@ -90,8 +90,7 @@ namespace Task1.Domain.Services;
         try
         {
             var result = await _repository.GetById(id);
-            var entity = result.Adapt<TEntity>();
-            await _repository.Remove(entity);
+            await _repository.Remove(result);
             _unitOfWork.Commit();
         }
         catch (Exception ex)

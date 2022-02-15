@@ -10,6 +10,9 @@ public class Task1DbContext : DbContext
     public DbSet<Course> Courses { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Tutor> Tutors { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<UserRequest> UserRequests { get; set; }
+    public DbSet<UserRequestCourse> UserRequestCourses { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,9 +24,13 @@ public class Task1DbContext : DbContext
             relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
         ConfigureCourses(modelBuilder);
+        ConfigureUserRequests(modelBuilder);
+        ConfigureUserRequestCourses(modelBuilder);
 
         base.OnModelCreating(modelBuilder);
     }
+
+    #region Model Configuration
 
     private static void ConfigureCourses(ModelBuilder modelBuilder)
     {
@@ -38,4 +45,26 @@ public class Task1DbContext : DbContext
             .HasForeignKey(b => b.TutorId);
     }
 
+    private static void ConfigureUserRequests(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<UserRequest>()
+            .HasOne(b => b.User)
+            .WithMany(b => b.UserRequests)
+            .HasForeignKey(b => b.UserId);
+    }
+
+    private static void ConfigureUserRequestCourses(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<UserRequestCourse>()
+            .HasOne(b => b.UserRequest)
+            .WithMany(b => b.UserRequestCourses)
+            .HasForeignKey(b => b.UserRequestId);
+
+        modelBuilder.Entity<UserRequestCourse>()
+            .HasOne(b => b.Course)
+            .WithMany(b => b.UserRequestCourses)
+            .HasForeignKey(b => b.CourseId);
+    }
+
+    #endregion
 }

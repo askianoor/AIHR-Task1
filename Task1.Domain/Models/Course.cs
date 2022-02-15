@@ -19,5 +19,7 @@ public class Course : EntityName
 
     public long TutorId { get; set; }
     public Tutor Tutor { get; set; }
+
+    public ICollection<UserRequestCourse> UserRequestCourses { get; set; }
 }
 
