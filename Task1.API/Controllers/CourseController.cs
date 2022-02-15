@@ -25,18 +25,21 @@ public class CourseController : ControllerBase
     }
 
     [HttpGet]
+    [Route("get-courses-by-level/{courseLevel}")]
     public async Task<IEnumerable<CourseResponseDto>> GetAllByLevelAsync(CourseLevel courseLevel)
     {
         return await _courseService.GetCoursesByLevel(courseLevel);
     }
 
     [HttpGet]
+    [Route("get-courses-by-type/{courseType}")]
     public async Task<IEnumerable<CourseResponseDto>> GetAllByTypeAsync(CourseType courseType)
     {
         return await _courseService.GetCoursesByType(courseType);
     }
 
     [HttpGet]
+    [Route("get-courses-by-category/{categoryId:long}")]
     public async Task<IEnumerable<CourseResponseDto>> GetAllByCategoryAsync(long categoryId)
     {
         return await _courseService.GetCoursesByCategoryId(categoryId);
@@ -44,7 +47,7 @@ public class CourseController : ControllerBase
 
     // GET api/<CourseController>/5
     [HttpGet("{id:long}")]
-    public async Task<CourseResponseDto> GetAsync(int id)
+    public async Task<CourseResponseDto> GetAsync(long id)
     {
         return await _courseService.GetById(id);
     }
@@ -65,7 +68,7 @@ public class CourseController : ControllerBase
 
     // DELETE api/<CourseController>/id
     [HttpDelete("{id:long}")]
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(long id)
     {
         return await _courseService.Remove(id);
     }
