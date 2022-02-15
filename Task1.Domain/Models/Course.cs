@@ -4,11 +4,8 @@ using Task1.Domain.Enums;
 namespace Task1.Domain.Models;
 
 [Table("Courses")]
-public class Course : Entity
+public class Course : EntityName
 {
-    [Column(TypeName = "varchar(50)")]
-    public string Name { get; set; }
-
     public int Duration { get; set; }
     public CourseType Type { get; set; }
     public CourseLevel Level { get; set; }

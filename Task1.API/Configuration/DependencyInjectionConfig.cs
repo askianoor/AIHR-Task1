@@ -25,6 +25,7 @@ public static class DependencyInjectionConfig
 
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ITutorRepository, TutorRepository>();
 
         #endregion
 
@@ -32,6 +33,7 @@ public static class DependencyInjectionConfig
 
         services.AddTransient<ICourseService, CourseService>();
         services.AddTransient<ICategoryService, CategoryService>();
+        services.AddTransient<ITutorService, TutorService>();
 
         #endregion
         

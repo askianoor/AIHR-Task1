@@ -3,9 +3,9 @@ using Task1.Domain.Enums;
 
 namespace Task1.Domain.Dtos.Course;
 
-public class CourseRequestDto
+public class CourseRequestDto: IEntityNameDto<long>
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
     
     [Required]
     public string Name { get; set; }

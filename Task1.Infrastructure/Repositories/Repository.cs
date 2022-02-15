@@ -7,7 +7,7 @@ using Task1.Infrastructure.Context;
 
 namespace Task1.Infrastructure.Repositories;
 
-public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+public abstract class Repository<TEntity> : IRepository<TEntity, long> where TEntity : EntityName
 {
     protected readonly Task1DbContext _db;
     private readonly DbSet<TEntity> _dbSet;
@@ -18,7 +18,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         _dbSet = db.Set<TEntity>();
     }
 
-    public async Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate)
+    public virtual async Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate)
     {
         return await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
     }
