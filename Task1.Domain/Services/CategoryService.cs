@@ -9,13 +9,8 @@ namespace Task1.Domain.Services;
 
 public class CategoryService : ApplicationService<Category,long,CategoryRequestDto,CategoryResponseDto,CategoryService>, ICategoryService
 {
-    private CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, ILogger<CategoryService> logger) 
+    public CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, ILogger<CategoryService> logger) 
         : base(categoryRepository, unitOfWork, logger)
     {
-    }
-
-    public static CategoryService CreateInstance(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, ILogger<CategoryService> logger)
-    {
-        return new CategoryService(categoryRepository, unitOfWork, logger);
     }
 }

@@ -15,20 +15,20 @@ public static class DependencyInjectionConfig
 
         #region Base
 
-        services.AddScoped<Task1DbContext>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<Task1DbContext>();
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient(typeof(IApplicationService<,,,,>), typeof(ApplicationService<,,,,>));
         
         #endregion
 
         #region Repositories
 
-        services.AddScoped<ICourseRepository, CourseRepository>();
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<ITutorRepository, TutorRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IUserRequestRepository, UserRequestRepository>();
-        services.AddScoped<IUserRequestCourseRepository, UserRequestCourseRepository>();
+        services.AddTransient<ICourseRepository, CourseRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddTransient<ITutorRepository, TutorRepository>();
+        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IUserRequestRepository, UserRequestRepository>();
+        services.AddTransient<IUserRequestCourseRepository, UserRequestCourseRepository>();
 
         #endregion
 
@@ -38,7 +38,7 @@ public static class DependencyInjectionConfig
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<ITutorService, TutorService>();
         services.AddTransient<IUserService, UserService>();
-        services.AddTransient<IUserRequestService, IUserRequestService>();
+        services.AddTransient<IUserRequestService, UserRequestService>();
         services.AddTransient<IUserRequestCourseService, UserRequestCourseService>();
 
         #endregion

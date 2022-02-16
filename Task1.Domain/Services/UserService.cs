@@ -12,15 +12,9 @@ public class UserService : ApplicationService<User, long, UserRequestDto, UserRe
 {
     private const string KeyString = "E546C8DF278CD5931069B522E695D4F2";
 
-    private UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UserService> logger)
+    public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UserService> logger)
         : base(userRepository, unitOfWork, logger)
     {
-    }
-
-    internal static UserService CreateInstance(IUserRepository userRepository, IUnitOfWork unitOfWork,
-        ILogger<UserService> logger)
-    {
-        return new UserService(userRepository, unitOfWork, logger);
     }
 
     public override Task<UserResponseDto> Add(UserRequestDto input)

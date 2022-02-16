@@ -12,7 +12,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity, long> where TEn
     protected readonly Task1DbContext _db;
     private readonly DbSet<TEntity> _dbSet;
 
-    protected Repository(Task1DbContext db)
+    public Repository(Task1DbContext db)
     {
         _db = db;
         _dbSet = db.Set<TEntity>();
@@ -27,7 +27,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity, long> where TEn
     {
         var entity = await _dbSet.FindAsync(id);
 
-        if (entity == null)
+        if (entity is null)
         {
             throw new ArgumentException(GlobalResource.CanNotFound);
         }

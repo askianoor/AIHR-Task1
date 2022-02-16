@@ -9,13 +9,8 @@ namespace Task1.Domain.Services;
 
 public class TutorService : ApplicationService<Tutor, long, TutorRequestDto, TutorResponseDto, TutorService>, ITutorService
 {
-    private TutorService(ITutorRepository tutorRepository, IUnitOfWork unitOfWork, ILogger<TutorService> logger)
+    public TutorService(ITutorRepository tutorRepository, IUnitOfWork unitOfWork, ILogger<TutorService> logger)
         : base(tutorRepository, unitOfWork, logger)
     {
-    }
-
-    internal static TutorService CreateInstance(ITutorRepository tutorRepository, IUnitOfWork unitOfWork, ILogger<TutorService> logger)
-    {
-        return new TutorService(tutorRepository, unitOfWork, logger);
     }
 }

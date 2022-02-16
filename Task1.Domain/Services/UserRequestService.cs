@@ -9,14 +9,14 @@ using Task1.Domain.Models;
 
 namespace Task1.Domain.Services;
 
-internal class UserRequestService : IUserRequestService
+public class UserRequestService : IUserRequestService
 {
     private readonly IUserRequestRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UserRequestService> _logger;
     private readonly IUserRequestCourseRepository _userRequestCourseRepository;
 
-    protected UserRequestService(IUserRequestRepository repository, IUnitOfWork unitOfWork, ILogger<UserRequestService> logger, IUserRequestCourseRepository userRequestCourseRepository)
+    public UserRequestService(IUserRequestRepository repository, IUnitOfWork unitOfWork, ILogger<UserRequestService> logger, IUserRequestCourseRepository userRequestCourseRepository)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;

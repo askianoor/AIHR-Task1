@@ -12,7 +12,7 @@ public class UserRequestRepository : IUserRequestRepository
     private readonly Task1DbContext _db;
     private readonly DbSet<UserRequest> _dbSet;
 
-    protected UserRequestRepository(Task1DbContext db)
+    public UserRequestRepository(Task1DbContext db)
     {
         _db = db;
         _dbSet = db.Set<UserRequest>();

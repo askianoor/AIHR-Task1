@@ -13,15 +13,10 @@ public class CourseService : ApplicationService<Course, long, CourseRequestDto, 
 {
     private readonly ICourseRepository _courseRepository;
 
-    private CourseService(ICourseRepository courseRepository, IUnitOfWork unitOfWork, ILogger<CourseService> logger)
+    public CourseService(ICourseRepository courseRepository, IUnitOfWork unitOfWork, ILogger<CourseService> logger)
         : base(courseRepository, unitOfWork, logger)
     {
         _courseRepository = courseRepository;
-    }
-
-    public static CourseService CreateInstance(ICourseRepository courseRepository, IUnitOfWork unitOfWork, ILogger<CourseService> logger)
-    {
-        return new CourseService(courseRepository, unitOfWork, logger);
     }
 
     public async Task<IEnumerable<CourseResponseDto>> GetCoursesByCategoryId(long categoryId)

@@ -14,7 +14,7 @@ public class UserRequestCourseService : IUserRequestCourseService
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UserRequestCourseService> _logger;
 
-    protected UserRequestCourseService(IUserRequestCourseRepository repository, IUnitOfWork unitOfWork, ILogger<UserRequestCourseService> logger)
+    public UserRequestCourseService(IUserRequestCourseRepository repository, IUnitOfWork unitOfWork, ILogger<UserRequestCourseService> logger)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;

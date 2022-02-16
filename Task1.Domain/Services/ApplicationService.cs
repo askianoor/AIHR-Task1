@@ -3,20 +3,21 @@ using Microsoft.Extensions.Logging;
 using Task1.Domain.Dtos;
 using Task1.Domain.Interfaces.Base;
 using Task1.Domain.Interfaces.IRepositories;
+using Task1.Domain.Interfaces.IServices;
 using Task1.Domain.Models;
 
 namespace Task1.Domain.Services;
 
-    public abstract class ApplicationService<TEntity, TPrimaryKey, TRequest,TResponse, TService> 
+    public class ApplicationService<TEntity, TPrimaryKey, TRequest,TResponse, TService> : IApplicationService<TEntity, TPrimaryKey, TRequest, TResponse, TService>
         where TEntity : EntityName 
-        where TRequest : IEntityNameDto<long>
+        where TRequest : IEntityNameDto<TPrimaryKey>
         where TResponse : class
     {
     private readonly IRepository<TEntity, TPrimaryKey> _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<TService> _logger;
 
-    protected ApplicationService(IRepository<TEntity, TPrimaryKey> repository, IUnitOfWork unitOfWork, ILogger<TService> logger)
+    public ApplicationService(IRepository<TEntity, TPrimaryKey> repository, IUnitOfWork unitOfWork, ILogger<TService> logger)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
@@ -43,36 +44,32 @@ namespace Task1.Domain.Services;
         {
             throw new Exception(GlobalResource.DuplicateMsg);
         }
-
-        var entity = input.Adapt<TEntity>();
-
+        
         try
         {
+            var entity = input.Adapt<TEntity>();
             await _repository.AddAsync(entity);
             _unitOfWork.Commit();
+            return entity.Adapt<TResponse>();
         }
         catch (Exception ex)
         {
             _unitOfWork.Dispose();
             _logger.LogError(GlobalResource.CanNotAdd, ex.Message);
-        }
 
-        return entity.Adapt<TResponse>();
+            throw new Exception(GlobalResource.CanNotAdd);
+        }
     }
 
     public virtual async Task<TResponse> Update(TRequest input)
     {
-        if (!await _repository.AnyAsync(b => b.Id == input.Id))
-        {
-            throw new Exception(GlobalResource.CanNotFound);
-        }
-
-        var entity = input.Adapt<TEntity>();
 
         try
         {
+            var entity = await _repository.GetById(input.Id);
             await _repository.Update(entity);
             _unitOfWork.Commit();
+            return entity.Adapt<TResponse>();
         }
         catch (Exception ex)
         {
@@ -82,15 +79,15 @@ namespace Task1.Domain.Services;
             throw new Exception(GlobalResource.CanNotUpdate);
         }
 
-        return entity.Adapt<TResponse>();
     }
 
     public virtual async Task<bool> Remove(TPrimaryKey id)
     {
+
         try
         {
-            var result = await _repository.GetById(id);
-            await _repository.Remove(result);
+            var entity = await _repository.GetById(id);
+            await _repository.Remove(entity);
             _unitOfWork.Commit();
         }
         catch (Exception ex)
