@@ -35,4 +35,10 @@ public class CourseRepository : Repository<Course>, ICourseRepository
             .Where(b => b.Level == level)
             .ToListAsync();
     }
+
+    public async Task<int> GetCoursesTotalHours(List<long> courseIds)
+    {
+        return await _db.Courses.AsNoTracking()
+            .Where(b => courseIds.Contains(b.Id)).SumAsync(b => b.Duration);
+    }
 }

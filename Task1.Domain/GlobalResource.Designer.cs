@@ -29,7 +29,7 @@ namespace Task1.Domain {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public GlobalResource() {
+        internal GlobalResource() {
         }
         
         /// <summary>
@@ -120,6 +120,15 @@ namespace Task1.Domain {
         public static string RemoveCourseError {
             get {
                 return ResourceManager.GetString("RemoveCourseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The end date is earlier than the start date!.
+        /// </summary>
+        public static string StartDateIsGreaterThanEndDate {
+            get {
+                return ResourceManager.GetString("StartDateIsGreaterThanEndDate", resourceCulture);
             }
         }
         

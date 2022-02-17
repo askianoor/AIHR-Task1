@@ -138,6 +138,9 @@
   <data name="RemoveCourseError" xml:space="preserve">
     <value>Remove Course Error: {0}</value>
   </data>
+  <data name="StartDateIsGreaterThanEndDate" xml:space="preserve">
+    <value>The end date is earlier than the start date!</value>
+  </data>
   <data name="UpdateCourseError" xml:space="preserve">
     <value>Update Course Error: {0}</value>
   </data>
