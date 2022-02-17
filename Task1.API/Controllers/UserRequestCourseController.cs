@@ -4,7 +4,7 @@ using Task1.Domain.Interfaces.IServices;
 
 namespace Task1.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[Action]")]
 [ApiController]
 public class UserRequestCourseController : ControllerBase
 {

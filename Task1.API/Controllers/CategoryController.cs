@@ -4,7 +4,7 @@ using Task1.Domain.Interfaces.IServices;
 
 namespace Task1.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[Action]")]
 [ApiController]
 public class CategoryController : ControllerBase
 {
@@ -28,13 +28,13 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<CategoryResponseDto> PostAsync([FromBody] CategoryRequestDto category)
+    public async Task<CategoryResponseDto> CreateAsync([FromBody] CategoryRequestDto category)
     {
         return await _categoryService.Add(category);
     }
 
     [HttpPut]
-    public async Task<CategoryResponseDto> Put([FromBody] CategoryRequestDto category)
+    public async Task<CategoryResponseDto> UpadateAsync([FromBody] CategoryRequestDto category)
     {
         return await _categoryService.Update(category);
     }

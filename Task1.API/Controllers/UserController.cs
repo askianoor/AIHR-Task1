@@ -4,7 +4,7 @@ using Task1.Domain.Interfaces.IServices;
 
 namespace Task1.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[Action]")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -28,13 +28,13 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<UserResponseDto> PostAsync([FromBody] UserRequestDto user)
+    public async Task<UserResponseDto> CreateAsync([FromBody] UserRequestDto user)
     {
         return await _userService.Add(user);
     }
 
     [HttpPut]
-    public async Task<UserResponseDto> Put([FromBody] UserRequestDto user)
+    public async Task<UserResponseDto> UpdateAsync([FromBody] UserRequestDto user)
     {
         return await _userService.Update(user);
     }

@@ -6,7 +6,7 @@ using Task1.Domain.Interfaces.IServices;
 
 namespace Task1.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[Action]")]
 [ApiController]
 public class CourseController : ControllerBase
 {
@@ -53,14 +53,14 @@ public class CourseController : ControllerBase
 
     // POST api/<CourseController>
     [HttpPost]
-    public async Task<CourseResponseDto> PostAsync([FromBody] CourseRequestDto course)
+    public async Task<CourseResponseDto> CreateAsync([FromBody] CourseRequestDto course)
     {
         return await _courseService.Add(course);
     }
 
     // PUT api/<CourseController>
     [HttpPut]
-    public async Task<CourseResponseDto> Put([FromBody] CourseRequestDto course)
+    public async Task<CourseResponseDto> UpdateAsync([FromBody] CourseRequestDto course)
     {
         return await _courseService.Update(course);
     }
